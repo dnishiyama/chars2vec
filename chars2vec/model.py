@@ -233,7 +233,9 @@ def train_model(emb_dim, X_train, y_train, model_chars,
     char_to_ix = {ch: i for i, ch in enumerate(model_chars)}
     c2v_model = Chars2Vec(emb_dim, char_to_ix)
 
-    targets = [float(el) for el in y_train]
+    # TODO: https://github.com/IntuitionEngineeringTeam/chars2vec/issues/8
+    # targets = [float(el) for el in y_train]
+    targets = np.array(y_train)
     c2v_model.fit(X_train, targets, max_epochs, patience, validation_split, batch_size)
 
     return c2v_model
